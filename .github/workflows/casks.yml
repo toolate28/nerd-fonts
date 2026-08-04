@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch stuff
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           sparse-checkout: bin/scripts
       - name: Fetch release artifacts
@@ -34,7 +34,7 @@ jobs:
           cd bin/scripts
           ./generate-casks.sh --setversion ${{ steps.releasetag.outputs.tag }}
       - name: Upload casks as artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: casks
           path: casks
@@ -52,7 +52,7 @@ jobs:
           PAK=$(echo "${FORK_TOKEN}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')
           echo "pak=${PAK}" >> $GITHUB_OUTPUT
       - name: Checkout Homebrew
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           repository: ${{ env.HOMEBREW_FORK }}
           path: homebrew
@@ -66,7 +66,7 @@ jobs:
           git reset --hard upstream/master
           git push --force origin HEAD:nerdfonts
       - name: Retrieve new casks
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: casks
           path: casks
@@ -74,7 +74,7 @@ jobs:
         run: |
           cp -r casks/* homebrew/Casks/font
       - name: Commit changes
-        uses: EndBug/add-and-commit@v9
+        uses: EndBug/add-and-commit@a94899bca583c204427a224a7af87c02f9b325d5 # v9
         with:
           cwd: homebrew
           fetch: false
